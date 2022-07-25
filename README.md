@@ -35,6 +35,8 @@ PORT = 3000
 ```
 If PORT: `3000` is being by used by another program it can be changed from `Rocket.toml` file
 
+## Database Schema
+![database](./database_simple_restaurant.PNG)
 
 ## License
 
