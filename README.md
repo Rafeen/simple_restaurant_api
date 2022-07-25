@@ -12,6 +12,9 @@ You can find the client application [here](https://github.com/Rafeen/simple_rest
 - [RUST](https://www.rust-lang.org/tools/install)
 - [DOCKER](https://docs.docker.com/get-docker)
 
+## API Documentation (Postman)
+https://documenter.getpostman.com/view/19630547/UzXLyd44
+
 ## Build & Launch the Application
 At first clon the repository using `git clone https://github.com/FlyLikeAPenguin/RustSimpleRestaurantApi.git`
 To build and run this application, apply theses commands in the project folder
