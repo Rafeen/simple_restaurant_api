@@ -13,7 +13,7 @@ You can find the client application [here](https://github.com/Rafeen/simple_rest
 - DOCKER
 
 ## Build & Launch the Application
-At first clon the repository using `https://github.com/FlyLikeAPenguin/RustSimpleRestaurantApi.git`
+At first clon the repository using `git clone https://github.com/FlyLikeAPenguin/RustSimpleRestaurantApi.git`
 To build and run this application, apply theses commands in the project folder
 ```sh
 docker compose up / docker compose up -d
