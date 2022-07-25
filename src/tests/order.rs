@@ -1,13 +1,12 @@
+use crate::models::order::{NewOrderItem, OrderItem};
+use crate::rocket_builder;
 use rand::distributions::uniform::SampleBorrow;
 use rocket::futures::task::Spawn;
 use rocket::http::{ContentType, Status};
-use rocket::serde::json::serde_json;
-use crate::models::order::{NewOrderItem, OrderItem};
 use rocket::local::asynchronous::Client;
-use rocket::serde::{Deserialize, Serialize};
+use rocket::serde::json::serde_json;
 use rocket::serde::json::serde_json::json;
-use crate::rocket_builder;
-
+use rocket::serde::{Deserialize, Serialize};
 
 #[async_test]
 async fn list_order_test() {
@@ -89,12 +88,19 @@ async fn list_remaining_order_for_invalid_table_by_item_test() {
 async fn create_order_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
 
-    let order_items:Vec<NewOrderItem> = vec![
-        NewOrderItem{item_id : 1, quantity :2},
-        NewOrderItem{item_id : 2, quantity :5}
+    let order_items: Vec<NewOrderItem> = vec![
+        NewOrderItem {
+            item_id: 1,
+            quantity: 2,
+        },
+        NewOrderItem {
+            item_id: 2,
+            quantity: 5,
+        },
     ];
 
-    let mut response = client.post("/order/4")
+    let mut response = client
+        .post("/order/4")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
@@ -104,8 +110,11 @@ async fn create_order_test() {
     assert_eq!(response.content_type(), Some(ContentType::JSON));
 
     //clean up
-    for item in order_items{
-        let res = client.delete(format!("/order/4/{}", item.item_id)).dispatch().await;
+    for item in order_items {
+        let res = client
+            .delete(format!("/order/4/{}", item.item_id))
+            .dispatch()
+            .await;
         assert_eq!(res.status(), Status::Ok);
     }
 }
@@ -113,12 +122,19 @@ async fn create_order_test() {
 #[async_test]
 async fn delete_all_order_for_table_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
-    let order_items:Vec<NewOrderItem> = vec![
-        NewOrderItem{item_id : 1, quantity :2},
-        NewOrderItem{item_id : 2, quantity :5}
+    let order_items: Vec<NewOrderItem> = vec![
+        NewOrderItem {
+            item_id: 1,
+            quantity: 2,
+        },
+        NewOrderItem {
+            item_id: 2,
+            quantity: 5,
+        },
     ];
 
-    let mut response = client.post("/order/3")
+    let mut response = client
+        .post("/order/3")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
@@ -131,7 +147,6 @@ async fn delete_all_order_for_table_test() {
 
     assert_eq!(response.status(), Status::Ok);
     assert_eq!(response.content_type(), Some(ContentType::JSON));
-
 }
 
 #[async_test]
@@ -155,31 +170,37 @@ async fn delete_order_for_table_by_invalid_item_test() {
 async fn update_order_item_for_table_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
 
-    let order_items:Vec<NewOrderItem> = vec![
-        NewOrderItem{item_id : 1, quantity :2},
-    ];
+    let order_items: Vec<NewOrderItem> = vec![NewOrderItem {
+        item_id: 1,
+        quantity: 2,
+    }];
 
-    let mut response = client.post("/order/2")
+    let mut response = client
+        .post("/order/2")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
         .await;
     assert_eq!(response.status(), Status::Created);
 
-    response = client.put("/order/2")
+    response = client
+        .put("/order/2")
         .header(ContentType::JSON)
-        .json(&OrderItem{
+        .json(&OrderItem {
             item_id: 1,
             quantity: 15,
-            served: false
+            served: false,
         })
         .dispatch()
         .await;
     assert_eq!(response.status(), Status::Ok);
 
     // cleaning up
-    for item in order_items{
-        response = client.delete(format!("/order/2/{}", item.item_id)).dispatch().await;
+    for item in order_items {
+        response = client
+            .delete(format!("/order/2/{}", item.item_id))
+            .dispatch()
+            .await;
         assert_eq!(response.status(), Status::Ok);
     }
 }

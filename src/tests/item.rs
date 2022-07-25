@@ -1,7 +1,7 @@
-use rocket::http::{ContentType, Status};
 use crate::models::item::{Item, NewItem};
-use rocket::local::asynchronous::Client;
 use crate::rocket_builder;
+use rocket::http::{ContentType, Status};
+use rocket::local::asynchronous::Client;
 use rocket::serde::{Deserialize, Serialize};
 
 #[cfg(test)]
@@ -15,13 +15,17 @@ async fn items_list_test() {
 #[derive(Deserialize)]
 struct ItemResponse {
     message: String,
-    data: Item
+    data: Item,
 }
 #[async_test]
 async fn new_item_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
-    let item = NewItem { name: "test_item".to_string(), price: 50.00 };
-    let mut response = client.post("/item")
+    let item = NewItem {
+        name: "test_item".to_string(),
+        price: 50.00,
+    };
+    let mut response = client
+        .post("/item")
         .header(ContentType::JSON)
         .json(&item)
         .dispatch()
@@ -32,15 +36,23 @@ async fn new_item_test() {
 
     let created_item = response.into_json::<ItemResponse>().await.unwrap();
     // Cleanup
-    let res = client.delete(format!("/item/{}", created_item.data.id)).dispatch().await;
+    let res = client
+        .delete(format!("/item/{}", created_item.data.id))
+        .dispatch()
+        .await;
     assert_eq!(res.status(), Status::Ok);
-
 }
 
 #[async_test]
 async fn delete_item_error_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
-    let item = Item { id: 6, name: "test_item".to_string(), duration: 15.0, price: 90.0, available: true };
+    let item = Item {
+        id: 6,
+        name: "test_item".to_string(),
+        duration: 15.0,
+        price: 90.0,
+        available: true,
+    };
     let mut response = client.delete(format!("/item/{}", item.id)).dispatch().await;
 
     assert_eq!(response.status(), Status::NotFound);

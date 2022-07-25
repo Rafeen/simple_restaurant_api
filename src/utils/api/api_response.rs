@@ -1,9 +1,8 @@
-use rocket::response::Responder;
-use rocket::serde::json::{Value};
-use rocket::serde::json::serde_json::json;
 use rocket::http::{ContentType, Status};
-use rocket::{Request, response};
-
+use rocket::response::Responder;
+use rocket::serde::json::serde_json::json;
+use rocket::serde::json::Value;
+use rocket::{response, Request};
 
 #[derive(Debug)]
 pub struct ApiResponse {
@@ -21,12 +20,11 @@ impl<'r> Responder<'r, 'r> for ApiResponse {
     }
 }
 
-
 /// A function for 400 response
 pub fn to_bad_request_response(message: String) -> ApiResponse {
     ApiResponse {
         status: Status::BadRequest,
-        data: json!({  "message": message })
+        data: json!({ "message": message }),
     }
 }
 
@@ -34,7 +32,7 @@ pub fn to_bad_request_response(message: String) -> ApiResponse {
 pub fn to_internal_server_error_response() -> ApiResponse {
     ApiResponse {
         status: Status::InternalServerError,
-        data: json!({  "message": "something went wrong" })
+        data: json!({  "message": "something went wrong" }),
     }
 }
 
@@ -42,6 +40,6 @@ pub fn to_internal_server_error_response() -> ApiResponse {
 pub fn to_resource_not_found_response(message: &str) -> ApiResponse {
     ApiResponse {
         status: Status::NotFound,
-        data: json!({  "message": message })
+        data: json!({ "message": message }),
     }
 }

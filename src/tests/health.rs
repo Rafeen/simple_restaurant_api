@@ -1,10 +1,10 @@
+use crate::models::table::Table;
+use crate::rocket_builder;
 use rand::distributions::uniform::SampleBorrow;
 use rocket::futures::task::Spawn;
 use rocket::http::{ContentType, Status};
-use rocket::serde::json::serde_json;
-use crate::models::table::Table;
 use rocket::local::blocking::Client;
-use crate::rocket_builder;
+use rocket::serde::json::serde_json;
 
 #[test]
 fn test_ping() {
