@@ -25,7 +25,7 @@ The application will run on
 IP = 127.0.0.1
 PORT = 3000
 ```
-If PORT: `3000` is being by used by other programs it can be changed from `Rocket.toml` file
+If PORT: `3000` is being by used by another program it can be changed from `Rocket.toml` file
 
 ## Prerequisites
 
