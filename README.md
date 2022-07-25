@@ -7,6 +7,11 @@ This git repository contains the server application.
 
 You can find the client application [here](https://github.com/Rafeen/simple_restaurant_client)
 
+## Prerequisites
+
+- RUST
+- DOCKER
+
 ## Build & Launch the Application
 At first clon the repository using `https://github.com/FlyLikeAPenguin/RustSimpleRestaurantApi.git`
 To build and run this application, apply theses commands in the project folder
@@ -27,10 +32,6 @@ PORT = 3000
 ```
 If PORT: `3000` is being by used by another program it can be changed from `Rocket.toml` file
 
-## Prerequisites
-
-- RUST
-- Docker
 
 ## License
 
