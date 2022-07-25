@@ -100,7 +100,7 @@ async fn create_order_test() {
     ];
 
     let mut response = client
-        .post("/order/4")
+        .put("/order/4")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
@@ -134,7 +134,7 @@ async fn delete_all_order_for_table_test() {
     ];
 
     let mut response = client
-        .post("/order/3")
+        .put("/order/3")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
@@ -176,7 +176,7 @@ async fn update_order_item_for_table_test() {
     }];
 
     let mut response = client
-        .post("/order/2")
+        .put("/order/2")
         .header(ContentType::JSON)
         .json(&order_items)
         .dispatch()
@@ -184,7 +184,7 @@ async fn update_order_item_for_table_test() {
     assert_eq!(response.status(), Status::Created);
 
     response = client
-        .put("/order/2")
+        .post("/order/2")
         .header(ContentType::JSON)
         .json(&OrderItem {
             item_id: 1,

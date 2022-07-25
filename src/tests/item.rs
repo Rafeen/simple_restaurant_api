@@ -25,7 +25,7 @@ async fn new_item_test() {
         price: 50.00,
     };
     let mut response = client
-        .post("/item")
+        .put("/item")
         .header(ContentType::JSON)
         .json(&item)
         .dispatch()

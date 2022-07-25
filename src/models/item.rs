@@ -28,7 +28,7 @@ pub async fn insert_item(
 ) -> sqlx::Result<Item> {
     sqlx::query_as::<_, Item>(r#"INSERT INTO items ( name, duration, price, available) VALUES ($1, $2, $3, $4) returning * "#)
         .bind(item.name.to_string())
-        .bind(generate_random_duration().await)
+        .bind(generate_random_item_duration().await)
         .bind(item.price)
         .bind(true)
         .fetch_one(&**db).await

@@ -21,7 +21,7 @@ pub async fn get_all_tables(db: &rocket::State<sqlx::PgPool>) -> ApiResponse {
     }
 }
 
-#[post("/", format = "json", data = "<table>")]
+#[put("/", format = "json", data = "<table>")]
 pub async fn create_table(db: &rocket::State<sqlx::PgPool>, table: Json<Table>) -> ApiResponse {
     let r = fetch_table_by_id(db, table.id).await;
     match r {

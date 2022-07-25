@@ -20,7 +20,7 @@ async fn new_table_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
     let table = Table { id: 100 };
     let mut response = client
-        .post("/table")
+        .put("/table")
         .header(ContentType::JSON)
         .json(&table)
         .dispatch()
@@ -40,9 +40,9 @@ async fn new_table_test() {
 #[async_test]
 async fn new_table_error_test() {
     let client = Client::tracked(rocket_builder()).await.unwrap();
-    let table = Table { id: 15 };
+    let table = Table { id: 55 };
     let mut response = client
-        .post("/table")
+        .put("/table")
         .header(ContentType::JSON)
         .json(&table)
         .dispatch()
@@ -51,7 +51,7 @@ async fn new_table_error_test() {
     assert_eq!(response.content_type(), Some(ContentType::JSON));
 
     response = client
-        .post("/table")
+        .put("/table")
         .header(ContentType::JSON)
         .json(&table)
         .dispatch()

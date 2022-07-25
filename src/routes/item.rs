@@ -5,7 +5,7 @@ use crate::utils::api::api_response::{
 use rocket::http::Status;
 use rocket::serde::json::serde_json::json;
 use rocket::serde::json::Json;
-use rocket::{delete, get, post};
+use rocket::{delete, get, put};
 
 #[get("/")]
 pub async fn get_all_items(db: &rocket::State<sqlx::PgPool>) -> ApiResponse {
@@ -19,7 +19,7 @@ pub async fn get_all_items(db: &rocket::State<sqlx::PgPool>) -> ApiResponse {
     }
 }
 
-#[post("/", format = "json", data = "<item>")]
+#[put("/", format = "json", data = "<item>")]
 pub async fn create_item(db: &rocket::State<sqlx::PgPool>, item: Json<NewItem>) -> ApiResponse {
     let r = insert_item(db, item).await;
     match r {

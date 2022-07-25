@@ -1,2 +1,2 @@
 pub(crate) mod api;
-pub mod random_generator;
+pub(crate) mod random_generator;

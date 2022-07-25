@@ -69,7 +69,7 @@ pub async fn get_remaining_order_for_table(
     }
 }
 
-#[post("/<table_id>", format = "json", data = "<order_items>")]
+#[put("/<table_id>", format = "json", data = "<order_items>")]
 pub async fn create_order(
     db: &rocket::State<sqlx::PgPool>,
     table_id: i32,
@@ -140,7 +140,7 @@ pub async fn remove_order_item(
     }
 }
 
-#[put("/<table_id>", data = "<order_item>")]
+#[post("/<table_id>", data = "<order_item>")]
 pub async fn update_order(
     db: &rocket::State<sqlx::PgPool>,
     table_id: i32,
