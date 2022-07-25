@@ -1,0 +1,29 @@
+[package]
+name = "simple_restaurant_api"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ishtiaque"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies.rocket]
+version = "0.5.0-rc.2"
+features = ["json"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+rand = "0.8.5"
+chrono = "0.4.19"
+
+
+[dependencies.sqlx]
+version = "0.5"
+default-features = false
+features = ["macros", "offline", "migrate", "chrono"]
+
+[dependencies.rocket_db_pools]
+version = "0.1.0-rc.2"
+features = ["sqlx_postgres"]
+
+
+[lib]
+doctest = false

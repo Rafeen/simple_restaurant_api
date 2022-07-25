@@ -1,0 +1,11 @@
+[default.databases.sqlx]
+url = "postgres://simple_restaurant:simple_restaurant@localhost/simple_restaurant"
+
+[debug]
+ROCKET_CLI_COLORS= true
+workers = 12
+port =  3000
+
+[release]
+workers = 12
+
