@@ -61,7 +61,7 @@ pub async fn fetch_order_item_by_item(
     db: &rocket::State<sqlx::PgPool>,
     table_id: i32,
     item_id: i32,
-) -> sqlx::Result<Vec<OrderItem>> {
+) -> sqlx::Result<OrderItem> {
     let query = format!("SELECT * from items where id={} ;", item_id);
     let item = sqlx::query_as::<_, Item>(&query)
         .fetch_optional(&**db)
@@ -93,7 +93,7 @@ pub async fn fetch_order_item_by_item(
     )
     .bind(table_id)
     .bind(item_id)
-    .fetch_all(&**db)
+    .fetch_one(&**db)
     .await
 }
 
